@@ -1,11 +1,5 @@
-
-/*****************globals*************/
-body {
-    overflow-x: hidden;
   
-}
-  
-  img {
+.product-detail-imag {
     max-width: 100%; }
   
   .preview {
