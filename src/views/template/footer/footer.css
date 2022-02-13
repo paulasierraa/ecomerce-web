@@ -4,16 +4,18 @@
   color: #f50057;
 }
 
-a:hover {
+.social-media-link:hover {
   background-color: black;
 }
 
 .facebook:hover {
   background: #4267b2;
+  color: white;
 }
 
 .twitter:hover {
   background: #1da1f2;
+  color: white;
 }
 
 .google:hover {
@@ -31,6 +33,7 @@ a:hover {
 
 .instagram:hover {
   background: #f09433;
+  color: white;
   background: -moz-linear-gradient(
     45deg,
     #f09433 0%,
@@ -60,16 +63,18 @@ a:hover {
 
 .linkedin:hover {
   background: #0077b5;
+  color: white;
 }
 
 .github:hover {
   background: black;
+  color: white;
 }
 
-a.btn {
+.social-media-link.btn {
   border-radius: 50%;
 }
 
-a.contributors {
+.social-media-link.contributors {
   text-decoration: none;
 }
