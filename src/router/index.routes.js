@@ -27,7 +27,7 @@ const router = async (route) => {
       break;
     }
     case "#/product-detail": {
-      break;
+      return content.appendChild(pages.ProductDetail());
     }
     default: {
       break;
