@@ -6,7 +6,7 @@ const router = async (route) => {
   content.innerHTML = "";
   switch (route) {
     case "#/": {
-      break;
+      return content.appendChild(pages.Home());
     }
     case "#/register": {
       return content.appendChild(pages.Register());
