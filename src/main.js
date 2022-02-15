@@ -9,6 +9,7 @@ import { router } from "./router/index.routes";
 document.getElementById("navbar").innerHTML = navBar;
 document.getElementById("footer").innerHTML = footer;
 
+router(window.location.hash);
 window.addEventListener("hashchange", () => {
   router(window.location.hash);
 });
