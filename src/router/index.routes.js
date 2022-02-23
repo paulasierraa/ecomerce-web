@@ -6,7 +6,7 @@ const router = async (route) => {
   content.innerHTML = "";
   switch (route) {
     case "#/": {
-      break;
+      return content.appendChild(pages.Home());
     }
     case "#/register": {
       return content.appendChild(pages.Register());
@@ -24,10 +24,10 @@ const router = async (route) => {
       break;
     }
     case "#/history": {
-      break;
+      return content.appendChild(pages.ShopHistory());
     }
     case "#/product-detail": {
-      break;
+      return content.appendChild(pages.ProductDetail());
     }
     default: {
       break;
