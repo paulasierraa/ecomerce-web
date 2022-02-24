@@ -18,7 +18,7 @@ const router = async (route) => {
       break;
     }
     case "#/shopping-cart": {
-      break;
+      return content.appendChild(pages.ShoppingCart());
     }
     case "#/payment": {
       break;
