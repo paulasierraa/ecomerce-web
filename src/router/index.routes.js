@@ -14,6 +14,9 @@ const router = async (route) => {
     case "#/login": {
       return content.appendChild(pages.Login());
     }
+    case "#/product-home": {
+      return content.appendChild(await pages.productHome());
+    }
     case "#/dashboard-productos": {
       break;
     }
