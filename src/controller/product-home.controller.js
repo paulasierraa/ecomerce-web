@@ -2,7 +2,7 @@ import views from "../views/product/product-home/product-home.html";
 
 const getProducts = async () => {
   const response = await fetch(
-    "http://localhost/ecommerce-core/routes/product.routes.php"
+    "http://localhost:8081/ecommerce-core/routes/product.routes.php"
   );
   return await response.json();
 };

@@ -1,3 +1,4 @@
+import {environment} from "../environments/environments";
 import views from "../views/auth/register/register.html";
 import "../views/auth/register/register.css";
 
@@ -19,9 +20,8 @@ export default () => {
       image: "",
       id_rol: 2,
     };
-
     fetch(
-      `http://localhost/ecommerce-core/routes/user.routes.php?username=${username}&email=${email}&password=${password}&state=1&image=hola&id_rol=2`,
+      `${environment.endpoint}/ecommerce-core/routes/user.routes.php?username=${username}&email=${email}&password=${password}&state=1&image=hola&id_rol=2`,
       {
         method: "POST",
         headers: {
