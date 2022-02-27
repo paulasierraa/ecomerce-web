@@ -3,6 +3,7 @@ import { pages } from "../controller/index.controller";
 let content = document.getElementById("root");
 
 const router = async (route) => {
+  const valores = route.split("?");
   content.innerHTML = "";
   switch (route) {
     case "#/": {
@@ -29,8 +30,8 @@ const router = async (route) => {
     case "#/history": {
       return content.appendChild(pages.ShopHistory());
     }
-    case "#/product-detail": {
-      return content.appendChild(pages.ProductDetail());
+    case `#/product-detail?${valores[1]}`: {
+      return content.appendChild(await pages.ProductDetail());
     }
     default: {
       break;

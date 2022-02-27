@@ -17,23 +17,29 @@ export default async () => {
 
   products.forEach((product) => {
     cardProduct.innerHTML += `
-    <div class="col-sm-3">
-    <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="${product.image}" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">${product.name}</h5>
-    <p class="card-text">${product.description}</p>
-  </div>
-  <div class="card-body">
-    <a href="#" class="btn">
-    <i class="fas fa-info"></i>
-    </a>
-    <button class="btn btn-default">
-    <i class="fas fa-shopping-cart"></i>
-    </button>
-  </div>
-</div>
-</div>
+    
+    <div class="card bg-dark text-white" style="width: 18rem;">
+      <img class="card-img-top" src="${product.image}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">${product.name}</h5>
+        <p class="card-text">${product.description}</p>
+      </div>
+      <div class="card-body">
+        <div class="row text-center">
+          <div class="col-md-6">
+            <a href="#/product-detail?id=${product.id}" class="btn add-to-cart">
+            <i class="fas fa-info-circle"></i>  
+            </a>
+          </div>
+          <div class="col-md-6">
+            <button class="btn add-to-cart btn-default">
+              <i class="fas fa-shopping-cart"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     `;
   });
 
