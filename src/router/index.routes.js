@@ -1,5 +1,5 @@
 import { pages } from "../controller/index.controller";
-
+import {environment} from "../environments/environments";
 let content = document.getElementById("root");
 
 const router = async (route) => {
@@ -15,7 +15,10 @@ const router = async (route) => {
       return content.appendChild(pages.Login());
     }
     case "#/product-home": {
-      return content.appendChild(await pages.productHome());
+      if(validateAuth())
+      {
+        return content.appendChild(await pages.productHome());
+      }
     }
     case "#/dashboard-productos": {
       break;
@@ -39,3 +42,14 @@ const router = async (route) => {
 };
 
 export { router };
+
+function validateAuth()
+{
+  var auth = localStorage.getItem("userInformation");
+    if(!auth)
+    {
+      window.location.replace(`${environment.principalPage}/#/`);
+      return false;
+    }
+    return true;
+}

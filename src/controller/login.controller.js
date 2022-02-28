@@ -13,7 +13,7 @@ export default () => {
 
     const email = divElement.querySelector("#emailtxt").value;
     const password = divElement.querySelector("#passwordtxt").value;
-    login(email, password,divElement);
+    login(email, password, divElement);
 
   });
   return divElement;
@@ -26,7 +26,7 @@ export default () => {
  * @param {string} password 
  * @return {user} usuario
  */
-function login(email, password,divElement) {
+var login = async (email, password, divElement) => {
   const errorMesagge = divElement.querySelector("#loginErrorMessage");
   fetch
     (
@@ -44,10 +44,10 @@ function login(email, password,divElement) {
       if (response.ok) {
         //parsea la información devuelta
         response.json().then(data => {
-          data.password=null;
           errorMesagge.classList.add("d-none")
-          localStorage.setItem("userInformation",JSON.stringify(data));
-          window.location.replace(`${environment.principalPage}/#/`);
+          localStorage.setItem("userInformation", JSON.stringify(data));
+          window.location.hash = '/';
+          window.location.reload()
         });
       }
       else {

@@ -11,5 +11,5 @@ document.getElementById("navbar").innerHTML = navBar;
 document.getElementById("footer").innerHTML = footer;
 router(window.location.hash);
 window.addEventListener("hashchange", () => {
-  router(window.location.hash);
+    router(window.location.hash);
 });
