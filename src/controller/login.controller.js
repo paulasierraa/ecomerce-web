@@ -2,6 +2,7 @@ import views from "../views/auth/login/login.html";
 import "../views/auth/login/login.css";
 import { environment } from "../environments/environments";
 // import ncrypt from 'ncrypt-js';
+import { router } from "../router/index.routes";
 
 
 export default () => {
@@ -9,7 +10,8 @@ export default () => {
   divElement.innerHTML = views;
 
   const form = divElement.querySelector("#formLogin");
-  form.addEventListener("submit", () => {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
     const email = divElement.querySelector("#emailtxt").value;
     const password = divElement.querySelector("#passwordtxt").value;
@@ -26,7 +28,7 @@ export default () => {
  * @param {string} password 
  * @return {user} usuario
  */
-var login = async (email, password, divElement) => {
+function login(email, password, divElement) {
   const errorMesagge = divElement.querySelector("#loginErrorMessage");
   fetch
     (
@@ -46,8 +48,8 @@ var login = async (email, password, divElement) => {
         response.json().then(data => {
           errorMesagge.classList.add("d-none")
           localStorage.setItem("userInformation", JSON.stringify(data));
-          window.location.hash = '/';
-          window.location.reload()
+          window.location.href =""
+    
         });
       }
       else {
