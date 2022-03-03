@@ -5,16 +5,17 @@
             <div class="search-container d-flex justify-content-center row">
                 <div class="col-6">
                     <div class="input-group mb-3 ">
-                        <input type="text" class="form-control bg-dark text-white "  id="txtBuscarCategoria"
+                        <input type="text" class="form-control bg-dark text-white " id="txtBuscarCategoria"
                             aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-warning" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+                        <button class="btn btn-outline-warning" type="button" id="button-addon2"><i
+                                class="fas fa-search"></i></button>
                     </div>
                 </div>
             </div>
 
             <div class="mt-4 row " style="text-align: end;">
                 <div class="button-container">
-                    <button class="btn btn-outline-warning"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         <i class="fas fa-plus"></i>
                         Nueva Categoría
                     </button>
@@ -61,30 +62,31 @@
     </div>
 </div>
 </div>
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Categoría</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Categoría</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-da">
+                <form class="row">
+                    <div class="mb-3">
+                        <label for="txtIdCategoria" class="form-label">Id</label>
+                        <input type="text" class="form-control" id="txtIdCategoria" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtCategoria" class="form-label">Categoría</label>
+                        <input type="text" class="form-control" id="txtCategoria" aria-describedby="emailHelp">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-warning">Guardar</button>
+            </div>
         </div>
-        <div class="modal-body bg-da">
-            <form class="row">
-                <div class="mb-3">
-                    <label for="txtIdCategoria" class="form-label">Id</label>
-                    <input type="text" class="form-control" id="txtIdCategoria" aria-describedby="emailHelp">
-                  </div>
-                  <div class="mb-3">
-                    <label for="txtCategoria" class="form-label">Categoría</label>
-                    <input type="text" class="form-control" id="txtCategoria" aria-describedby="emailHelp">
-                  </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-warning">Guardar</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
