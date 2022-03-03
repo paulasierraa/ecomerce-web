@@ -7,6 +7,7 @@ import ShoppingCart from "./shopping-cart.controller";
 import productHome from "./product-home.controller";
 import dashboard from "./dashboard.controller";
 import productList from "./product.controller";
+import category from "./category.controller";
 const pages = {
   Login,
   Register,
@@ -16,7 +17,8 @@ const pages = {
   ShoppingCart,
   productHome,
   dashboard,
-  productList
+  productList,
+  category,
 };
 
 export { pages };

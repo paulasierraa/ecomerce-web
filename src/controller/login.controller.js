@@ -47,6 +47,7 @@ function login(email, password, divElement) {
         //parsea la información devuelta
         response.json().then(data => {
           errorMesagge.classList.add("d-none")
+          dashboardItem.classList.remove("d-none");
           localStorage.setItem("userInformation", JSON.stringify(data));
           window.location.href =""
     

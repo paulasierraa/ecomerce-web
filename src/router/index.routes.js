@@ -42,7 +42,7 @@ const router = async (route) => {
       return dashboardContent.appendChild(pages.dashboard());
     }
     case "#/dashboard/categoria": {
-      return content.appendChild(pages.dashboard());
+      return content.appendChild(pages.category());
     }
     default: {
       break;
