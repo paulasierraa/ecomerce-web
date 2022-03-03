@@ -5,6 +5,8 @@ import Home from "./home.controller";
 import ShopHistory from "./shop-history.controller";
 import ShoppingCart from "./shopping-cart.controller";
 import productHome from "./product-home.controller";
+import dashboard from "./dashboard.controller";
+import productList from "./product.controller";
 const pages = {
   Login,
   Register,
@@ -13,6 +15,8 @@ const pages = {
   ShopHistory,
   ShoppingCart,
   productHome,
+  dashboard,
+  productList
 };
 
 export { pages };

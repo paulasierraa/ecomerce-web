@@ -1,7 +1,7 @@
 import { pages } from "../controller/index.controller";
 import {environment} from "../environments/environments";
 let content = document.getElementById("root");
-
+let dashboardContent  = document.getElementById("dashboard-content");
 const router = async (route) => {
   content.innerHTML = "";
   switch (route) {
@@ -23,9 +23,6 @@ const router = async (route) => {
         return content.appendChild(await pages.productHome());
       }
     }
-    case "#/dashboard-productos": {
-      break;
-    }
     case "#/shopping-cart": {
       return content.appendChild(pages.ShoppingCart());
     }
@@ -37,6 +34,15 @@ const router = async (route) => {
     }
     case "#/product-detail": {
       return content.appendChild(pages.ProductDetail());
+    }
+    case "#/dashboard": {
+      return content.appendChild(pages.dashboard());
+    }
+    case "#/dashboard/producto": {
+      return dashboardContent.appendChild(pages.dashboard());
+    }
+    case "#/dashboard/categoria": {
+      return content.appendChild(pages.dashboard());
     }
     default: {
       break;
