@@ -1,7 +1,7 @@
 import { pages } from "../controller/index.controller";
-import {environment} from "../environments/environments";
+import { environment } from "../environments/environments";
 let content = document.getElementById("root");
-let dashboardContent  = document.getElementById("dashboard-content");
+let dashboardContent = document.getElementById("dashboard-content");
 const router = async (route) => {
   content.innerHTML = "";
   switch (route) {
@@ -18,8 +18,7 @@ const router = async (route) => {
       return content.appendChild(pages.Login());
     }
     case "#/product-home": {
-      if(validateAuth())
-      {
+      if (validateAuth()) {
         return content.appendChild(await pages.productHome());
       }
     }
@@ -39,7 +38,7 @@ const router = async (route) => {
       return content.appendChild(pages.dashboard());
     }
     case "#/dashboard/productos": {
-      return dashboardContent.appendChild(pages.productList());
+      return content.appendChild(pages.product());
     }
     case "#/dashboard/categoria": {
       return content.appendChild(pages.category());
@@ -52,13 +51,11 @@ const router = async (route) => {
 
 export { router };
 
-function validateAuth()
-{
+function validateAuth() {
   var auth = localStorage.getItem("userInformation");
-    if(!auth)
-    {
-      window.location.replace(`${environment.principalPage}/#/`);
-      return false;
-    }
-    return true;
+  if (!auth) {
+    window.location.replace(`${environment.principalPage}/#/`);
+    return false;
+  }
+  return true;
 }
