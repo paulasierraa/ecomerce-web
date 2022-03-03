@@ -38,8 +38,8 @@ const router = async (route) => {
     case "#/dashboard": {
       return content.appendChild(pages.dashboard());
     }
-    case "#/dashboard/producto": {
-      return dashboardContent.appendChild(pages.dashboard());
+    case "#/dashboard/productos": {
+      return dashboardContent.appendChild(pages.productList());
     }
     case "#/dashboard/categoria": {
       return content.appendChild(pages.category());
