@@ -7,7 +7,7 @@
                     <div class="input-group mb-3 ">
                         <input type="text" class="form-control bg-dark text-white " id="txtBuscarProducto"
                             aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-warning" type="button" id="button-addon2"><i
+                        <button class="btn btn-outline-warning" type="button" id="btnSearchProduct"><i
                                 class="fas fa-search"></i></button>
                     </div>
                 </div>
@@ -23,40 +23,16 @@
             </div>
             <table class="table table-dark table-hover">
                 <thead>
-                    <th>Columna 1 </th>
-                    <th>Columna 2 </th>
+                    <th>Id </th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Imagen</th>
+                    <th>Stock</th>
+                    <th>Categoría</th>
                     <th>Acciones</th>
-
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Dato 1</td>
-                        <td>Dato 1</td>
-                        <td>
-                            <button class="btn btn-warning">
-                                <i class="fas fa-edit"></i>
-                                Editar
-                            </button>
-                            <button class="btn btn-danger">
-                                <i class="fas fa-trash"></i>
-                                Eliminar
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Dato 2</td>
-                        <td>Dato 2</td>
-                        <td>
-                            <button class="btn btn-warning">
-                                <i class="fas fa-edit"></i>
-                                Editar
-                            </button>
-                            <button class="btn btn-danger">
-                                <i class="fas fa-trash"></i>
-                                Eliminar
-                            </button>
-                        </td>
-                    </tr>
+                <tbody id="list-products">
                 </tbody>
             </table>
     </div>
@@ -73,7 +49,7 @@
             </div>
             <div class="modal-body bg-da">
                 <form class="row">
-                    <div class="mb-3 col-md-6 col-sm-12"> 
+                    <div class="mb-3 col-md-6 col-sm-12">
                         <label for="txtId" class="form-label">Id</label>
                         <input type="text" class="form-control" id="txtId" aria-describedby="emailHelp">
                     </div>
@@ -94,6 +70,10 @@
                         <input type="text" class="form-control" id="txtImagen" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3 col-sm-12">
+                        <label for="txtDescripcion" class="form-label">Descripción</label>
+                        <textarea type="text" class="form-control" id="txtDescripcion" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3 col-sm-12">
                         <select class="form-select" aria-label="Default select example" id="txtCategoria">
                             <option selected>Categoría</option>
                             <option value="1">Computador</option>
@@ -102,11 +82,12 @@
                         </select>
                     </div>
                 </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-warning" id="btnGuardarProducto">Guardar</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-warning">Guardar</button>
-            </div>
-        </div>
+          
+        </div> 
     </div>
 </div>

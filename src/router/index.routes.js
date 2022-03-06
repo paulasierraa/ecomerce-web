@@ -38,10 +38,10 @@ const router = async (route) => {
       return content.appendChild(pages.dashboard());
     }
     case "#/dashboard/productos": {
-      return content.appendChild(pages.product());
+      return content.appendChild(await pages.product());
     }
     case "#/dashboard/categoria": {
-      return content.appendChild(pages.category());
+      return content.appendChild(await pages.category());
     }
     default: {
       break;
