@@ -1,5 +1,7 @@
 import views from "../views/product/product-home/product-home.html";
 
+const keyLocalStorage = "Productos";
+
 const getProducts = async () => {
   const response = await fetch(
     "http://localhost/ecommerce-core/routes/product.routes.php"
@@ -7,41 +9,84 @@ const getProducts = async () => {
   return await response.json();
 };
 
+const getProductById = async (id) => {
+  const response = await fetch(
+    `http://localhost/ecommerce-core/routes/products.routes.php?id=${id}`
+  );
+  return await response.json();
+};
+
+const getProductsPaginate = async () => {
+  const response = await fetch(
+    `http://localhost/ecommerce-core/routes/paginate-products.routes.php?pagina=0&regPagina=8`
+  );
+  return await response.json();
+};
+
 export default async () => {
   const divElement = document.createElement("div");
   divElement.innerHTML = views;
+  const productsCantidad = await getProducts();
+  let regPagina = 8;
+  let paginas = productsCantidad.length / regPagina;
+  const templateCard = divElement.querySelector("#template-card").content;
+  const items = divElement.querySelector("#items");
+  const fragment = document.createDocumentFragment();
 
-  const cardProduct = divElement.querySelector("#card-products");
+  const products = await getProductsPaginate();
 
-  const products = await getProducts();
+  console.log(products);
 
   products.forEach((product) => {
-    cardProduct.innerHTML += `
-    
-    <div class="card bg-dark text-white" style="width: 18rem;">
-      <img class="card-img-top" src="${product.image}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">${product.name}</h5>
-        <p class="card-text">${product.description}</p>
-      </div>
-      <div class="card-body">
-        <div class="row text-center">
-          <div class="col-md-6">
-            <a href="#/product-detail?id=${product.id}" class="btn add-to-cart">
-            <i class="fas fa-info-circle"></i>  
-            </a>
-          </div>
-          <div class="col-md-6">
-            <button class="btn add-to-cart btn-default">
-              <i class="fas fa-shopping-cart"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    `;
+    templateCard.querySelector("h5").textContent = product.name;
+    templateCard.querySelector("img").src = product.image;
+    templateCard.querySelector("p").textContent = product.price;
+    templateCard.querySelector("a").href = `#/product-detail?id=${product.id}`;
+    templateCard.querySelector(".btn-cart").dataset.id = product.id;
+    const clone = templateCard.cloneNode(true);
+    fragment.appendChild(clone);
+  });
+  items.appendChild(fragment);
+
+  items.addEventListener("click", (event) => {
+    addToCart(event);
   });
 
+  for (let i = 0; i < paginas; i++) {}
+
+  console.log(productsCantidad.length);
+
   return divElement;
+};
+
+const addToCart = (event) => {
+  if (event.target.classList.contains("btn-cart")) {
+    const id = event.target.dataset.id;
+    addToLocalStorage(id);
+    event.stopPropagation();
+  }
+};
+
+const addToLocalStorage = (id) => {
+  let datosGuardados = readLocalStorage() || [];
+  let datosFinales = [...datosGuardados, id];
+  // productRepeat(datosFinales);
+  localStorage.setItem(keyLocalStorage, JSON.stringify(datosFinales));
+};
+
+const readLocalStorage = () => {
+  return JSON.parse(localStorage.getItem(keyLocalStorage));
+};
+
+const productRepeat = (product) => {
+  let producto;
+  let datosGuardados = readLocalStorage() || [];
+  if (datosGuardados.length.length > 0) {
+    producto = datosGuardados.map((item) => {
+      if (item.id === product.id) {
+        item.cantidad++;
+      }
+    });
+  }
+  localStorage.setItem(keyLocalStorage, JSON.stringify(producto));
 };

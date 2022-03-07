@@ -5,8 +5,11 @@ export default () => {
   const divElement = document.createElement("div");
   divElement.innerHTML = views;
 
+  const PORT = 8080 || process.env.PORT;
+
   const btnRegister = divElement.querySelector("#btnRegister");
-  btnRegister.addEventListener("click", () => {
+  btnRegister.addEventListener("click", (event) => {
+    event.preventDefault();
     const username = divElement.querySelector("#floatingInputUser").value;
     const email = divElement.querySelector("#floatingInput").value;
     const password = divElement.querySelector("#floatingPassword").value;

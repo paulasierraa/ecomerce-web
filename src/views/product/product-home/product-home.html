@@ -16,17 +16,62 @@
   color: #fff;
   -webkit-transition: background 0.3s ease;
   transition: background 0.3s ease;
+  
 } 
+
+.img{
+  width: 290px;
+  height: 290px;
+}
 </style>
 
 <div class="mt-4 ms-4">
-        <h1>Celulares</h1>
-        <div id="card-products">
-            <div class="row">
-                <div class="col-md-3"></div>
-            </div>
-        </div>
+  <h1 class="mb-4">Productos</h1>      
+  <div class="row" id="items">
+
+  </div>    
 </div>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link">Previous</a>
+    </li>
+    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+
+<template id="template-card">
+  <div class="col-12-mb-2 col-md-3">
+  <div class="card bg-dark text-white" style="width: 18rem;">
+    <img class="card-img-top img" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title" id="title">Titulo</h5>
+      <p class="card-text">precio</p>
+    </div>
+    <div class="card-body">
+      <div class="row text-center">
+        <div class="col-md-6">
+          <a class="btn add-to-cart btn-default">
+          <i class="fas fa-info-circle"></i>  
+          </a>
+        </div>
+        <div class="col-md-6">
+          <button class="btn add-to-cart btn-default btn-cart">
+            <i class="fas fa-shopping-cart"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+
 <!-- 
 <div class="row">
     <div class="col-md-12 text-center">
