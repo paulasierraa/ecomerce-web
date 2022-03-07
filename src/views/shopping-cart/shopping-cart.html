@@ -33,16 +33,15 @@
               </div>
         </div>
         <div class="col-md-3">
-            <div class="card text-white bg-dark">
+            <div class="card text-white bg-dark card-price">
                 <div class="card-header">
                   Order Summary
                 </div>
                 <div class="card-body">
-                  <h6>Subtotal</h6>
-                  <h6>Shipping</h6>
+                  <h6 id="subtotalCard">Subtotal</h6>
                 </div>
                 <div class="card-footer text-white">
-                    Total
+                    <h6 id="totalCard">Total</h6>
                 </div>
             </div>
             <div class="pt-2 d-grid gap-2">
@@ -51,6 +50,26 @@
         </div>
     </div>
 </div>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">CHECKOUT</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary checkCart">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <template id="product-row">
     <tr>
@@ -77,3 +96,9 @@
         </td>
     </tr>
 </template>
+
+<div class="alert alert-success d-none pt-3" role="alert" id="alertShop">
+  ¡Compra realizada con éxito!
+</div>
+  
+  

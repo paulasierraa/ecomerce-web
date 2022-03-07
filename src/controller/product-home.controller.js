@@ -1,10 +1,11 @@
 import views from "../views/product/product-home/product-home.html";
+import { environment } from "../environments/environments";
 
 const keyLocalStorage = "Productos";
 
 const getProducts = async () => {
   const response = await fetch(
-    "http://localhost/ecommerce-core/routes/product.routes.php"
+    `${environment.endpoint}/ecommerce-core/routes/product.routes.php`
   );
   return await response.json();
 };
@@ -16,9 +17,9 @@ const getProductById = async (id) => {
   return await response.json();
 };
 
-const getProductsPaginate = async () => {
+const getProductsPaginate = async (reg, regPagina) => {
   const response = await fetch(
-    `http://localhost/ecommerce-core/routes/paginate-products.routes.php?pagina=0&regPagina=8`
+    `${environment.endpoint}/ecommerce-core/routes/paginate-products.routes.php?pagina=0&regPagina=8`
   );
   return await response.json();
 };
@@ -30,7 +31,7 @@ export default async () => {
   let regPagina = 8;
   let paginas = productsCantidad.length / regPagina;
   const templateCard = divElement.querySelector("#template-card").content;
-  const items = divElement.querySelector("#items");
+  const items = divElement.querySelector("#card-products");
   const fragment = document.createDocumentFragment();
 
   const products = await getProductsPaginate();
@@ -67,8 +68,9 @@ const addToCart = (event) => {
   }
 };
 
-const addToLocalStorage = (id) => {
+const addToLocalStorage = async (id) => {
   let datosGuardados = readLocalStorage() || [];
+  const producto = await getProductById(id);
   let datosFinales = [...datosGuardados, id];
   // productRepeat(datosFinales);
   localStorage.setItem(keyLocalStorage, JSON.stringify(datosFinales));

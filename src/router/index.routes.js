@@ -1,11 +1,14 @@
 import { pages } from "../controller/index.controller";
-
+import { environment } from "../environments/environments";
 let content = document.getElementById("root");
-
+let dashboardContent = document.getElementById("dashboard-content");
 const router = async (route) => {
   const valores = route.split("?");
   content.innerHTML = "";
   switch (route) {
+    case "": {
+      return content.appendChild(pages.Home());
+    }
     case "#/": {
       return content.appendChild(pages.Home());
     }
@@ -16,10 +19,9 @@ const router = async (route) => {
       return content.appendChild(pages.Login());
     }
     case "#/product-home": {
-      return content.appendChild(await pages.productHome());
-    }
-    case "#/dashboard-productos": {
-      break;
+      if (validateAuth()) {
+        return content.appendChild(await pages.productHome());
+      }
     }
     case "#/shopping-cart": {
       return content.appendChild(pages.ShoppingCart());
@@ -33,6 +35,19 @@ const router = async (route) => {
     case `#/product-detail?${valores[1]}`: {
       return content.appendChild(await pages.ProductDetail());
     }
+    case "#/dashboard": {
+      return content.appendChild(pages.dashboard());
+    }
+    case "#/dashboard/productos": {
+      if (validateAuthAdmin()) {
+        return content.appendChild(await pages.product());
+      }
+    }
+    case "#/dashboard/categoria": {
+      if (validateAuthAdmin()) {
+        return content.appendChild(await pages.category());
+      }
+    }
     default: {
       break;
     }
@@ -40,3 +55,22 @@ const router = async (route) => {
 };
 
 export { router };
+
+function validateAuth() {
+  var auth = localStorage.getItem("userInformation");
+  if (!auth) {
+    window.location.replace(`${environment.principalPage}/#/`);
+    return false;
+  }
+  return true;
+}
+
+function validateAuthAdmin() {
+  var auth = localStorage.getItem("userInformation");
+  let user = JSON.parse(localStorage.getItem("userInformation"));
+  if (!auth || user.id_rol_fk != 1) {
+    window.location.replace(`${environment.principalPage}/#/`);
+    return false;
+  }
+  return true;
+}

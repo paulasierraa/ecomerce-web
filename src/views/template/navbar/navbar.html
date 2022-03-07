@@ -1,7 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar-element">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#/">POINT TECHNOLOGIC</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/#/">POINT TECHNOLOGIC</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -12,35 +13,55 @@
     </div>
     <div class="d-flex">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a href="#/history" class="nav-link">
+        <li class="nav-item d-none" id="option-history">
+          <a href="#/history" class="nav-link d-none">
             <i class="fas fa-history fa-lg"></i>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="#/shopping-cart" class="nav-link position-relative">
+        <li class="nav-item d-none" id="option-cart">
+          <a href="#/shopping-cart" class="nav-link">
             <i class="fas fa-shopping-cart fa-lg"></i>
-            <span class="badge bg-secondary">0</span>
+            <!-- <span class="badge bg-secondary">0</span> -->
           </a>
         </li>
         <li class="nav-item">
           <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="fas fa-user-alt fa-lg"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDarkDropdownMenuLink">
-                  <li>
-                    <a class="dropdown-item" href="#/login">
+                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
+                  aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li id="option-login">
+                    <a class="dropdown-item" href="/#/login">
                       Login
-                      <i class="fas fa-sign-in-alt fa-lg"></i> 
+                      <i class="fas fa-sign-in-alt fa-lg"></i>
                     </a>
                   </li>
-                  <li>
-                    <a class="dropdown-item" href="#/register">
+                  <li id="option-register">
+                    <a class="dropdown-item" href="/#/register">
                       Register
                       <i class="fas fa-clipboard-list fa-lg"></i>
+                    </a>
+                  </li>
+                  <li class="dashboard-item d-none" id="option-category">
+                    <a class="dropdown-item" href="/#/dashboard/categoria">
+                      Categoría
+                      <i class="fas fa-tags fa-lg"></i>
+                    </a>
+                  </li>
+                  <li class="dashboard-item d-none" id="option-product">
+                    <a class="dropdown-item" href="/#/dashboard/productos">
+                      Productos
+                      <i class="fas fa-box fa-lg"></i>
+                    </a>
+                  </li>
+                  <li class="dashboard-item d-none" id="option-logout" style="cursor:pointer" >
+                    <a class="dropdown-item">
+                      Salir
+                      <i class="fa fa-sign-out-alt fa-lg" aria-hidden="true"></i>
                     </a>
                   </li>
                 </ul>
@@ -50,6 +71,6 @@
         </li>
       </ul>
     </div>
-    
+
   </div>
 </nav>
