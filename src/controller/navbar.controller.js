@@ -1,7 +1,6 @@
 
 function setPermisos() {
     const divElement = document.getElementById("navbar-element");
-    console.log("navbar", divElement);
     let user = JSON.parse(localStorage.getItem("userInformation"));
     let id_rol = user.id_rol_fk;
     if (id_rol == "1") {
