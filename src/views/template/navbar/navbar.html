@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar-element">
   <div class="container-fluid">
     <a class="navbar-brand" href="/#/">POINT TECHNOLOGIC</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -45,16 +45,22 @@
                       <i class="fas fa-clipboard-list fa-lg"></i>
                     </a>
                   </li>
-                  <li class="dashboard-item">
+                  <li class="dashboard-item d-none" id="option-category">
                     <a class="dropdown-item" href="/#/dashboard/categoria">
                       Categoría
-                      <i class="fas fa-clipboard-list fa-lg"></i>
+                      <i class="fas fa-tags fa-lg"></i>
                     </a>
                   </li>
-                  <li class="dashboard-item">
+                  <li class="dashboard-item d-none" id="option-product">
                     <a class="dropdown-item" href="/#/dashboard/productos">
                       Productos
-                      <i class="fas fa-clipboard-list fa-lg"></i>
+                      <i class="fas fa-box fa-lg"></i>
+                    </a>
+                  </li>
+                  <li class="dashboard-item d-none" id="option-logout" style="cursor:pointer" >
+                    <a class="dropdown-item">
+                      Salir
+                      <i class="fa fa-sign-out-alt fa-lg" aria-hidden="true"></i>
                     </a>
                   </li>
                 </ul>

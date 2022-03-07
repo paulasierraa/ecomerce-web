@@ -115,8 +115,7 @@ function create(category, divElement) {
         })
         .catch((error) => console.log(error))
 }
-function limpiarFormulario(divElement)
-{
-    divElement.querySelector("#txtCategoria").value="";
-    divElement.querySelector("#txtIdCategoria").value="";
+function limpiarFormulario(divElement) {
+    divElement.querySelector("#txtCategoria").value = "";
+    divElement.querySelector("#txtIdCategoria").value = "";
 }

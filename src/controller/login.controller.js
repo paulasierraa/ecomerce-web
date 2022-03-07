@@ -1,9 +1,7 @@
 import views from "../views/auth/login/login.html";
 import "../views/auth/login/login.css";
 import { environment } from "../environments/environments";
-// import ncrypt from 'ncrypt-js';
-import { router } from "../router/index.routes";
-
+import {setPermisos} from './navbar.controller.js';
 
 export default () => {
   const divElement = document.createElement("div");
@@ -49,8 +47,9 @@ function login(email, password, divElement) {
           errorMesagge.classList.add("d-none")
           // dashboardItem.classList.remove("d-none");
           localStorage.setItem("userInformation", JSON.stringify(data));
-          window.location.href =""
-    
+          setPermisos();
+          window.location.href = ""
+
         });
       }
       else {
