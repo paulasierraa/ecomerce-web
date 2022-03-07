@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="card mt-4 bg-dark">
         <h2 class="text-center text-white mt-3">Productos</h2>
-        <iv class="card-body">
+        <div class="card-body">
             <div class="search-container d-flex justify-content-center row">
                 <div class="col-6">
                     <div class="input-group mb-3 ">
@@ -35,59 +35,55 @@
                 <tbody id="list-products">
                 </tbody>
             </table>
+        </div>
     </div>
-</div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Producto</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body bg-da">
+            <div class="modal-body">
                 <form class="row">
                     <div class="mb-3 col-md-6 col-sm-12">
                         <label for="txtId" class="form-label">Id</label>
-                        <input type="text" class="form-control" id="txtId" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="txtId">
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
                         <label for="txtNombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="txtNombre" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="txtNombre">
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
                         <label for="txtPrecio" class="form-label">Precio</label>
-                        <input type="text" class="form-control" id="txtPrecio" aria-describedby="emailHelp">
+                        <input type="number" class="form-control" id="txtPrecio">
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
                         <label for="txtStock" class="form-label">Stock</label>
-                        <input type="text" class="form-control" id="txtStock" aria-describedby="emailHelp">
+                        <input type="number" class="form-control" id="txtStock">
                     </div>
                     <div class="mb-3 col-sm-12">
                         <label for="txtImagen" class="form-label">Imagen</label>
-                        <input type="text" class="form-control" id="txtImagen" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="txtImagen">
                     </div>
                     <div class="mb-3 col-sm-12">
                         <label for="txtDescripcion" class="form-label">Descripción</label>
-                        <textarea type="text" class="form-control" id="txtDescripcion" aria-describedby="emailHelp">
+                        <textarea class="form-control" id="txtDescripcion"></textarea>
                     </div>
                     <div class="mb-3 col-sm-12">
-                        <select class="form-select" aria-label="Default select example" id="txtCategoria">
-                            <option selected>Categoría</option>
-                            <option value="1">Computador</option>
-                            <option value="2">Celulares</option>
-                            <option value="3">Ipad</option>
+                        <select class="form-select" aria-label="Default select example" id="select-category">
+                        
                         </select>
                     </div>
                 </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-warning" id="btnGuardarProducto">Guardar</button>
-                </div>
             </div>
-          
-        </div> 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-warning" id="btnGuardarProducto">Guardar</button>
+            </div>
+        </div>
     </div>
 </div>

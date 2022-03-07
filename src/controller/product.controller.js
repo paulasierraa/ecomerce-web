@@ -2,6 +2,8 @@ import views from '../views/dashboard/product/product.html';
 import '../views/dashboard/product/product.css';
 import { environment } from '../environments/environments';
 import { Product } from '../models/product';
+import * as CategoryController from './category.controller.js';
+
 export default async () => {
     const divElement = document.createElement("div");
     divElement.innerHTML = views;
@@ -9,28 +11,30 @@ export default async () => {
     const bodyTable = divElement.querySelector("#list-products");
     const btnSearch = divElement.querySelector("#txtBuscarProducto");
     const btnGuardar = divElement.querySelector("#btnGuardarProducto");
-
+    const selectCategories = divElement.querySelector("#select-category")
     btnSearch.addEventListener("click", (event) => {
         let filter = divElement.querySelector("#txtBuscarProducto").value;
         search(filter, divElement);
     })
 
-    // btnGuardar.addEventListener("click", (event) => {
-    //     // event.preventDefault();
+    btnGuardar.addEventListener("click", (event) => {
+        // event.preventDefault();
 
-    //     let product = new Product(
-    //         0,
-    //         divElement.querySelector("#txtNombre").value,
-    //         divElement.querySelector("#txtDesripcion").value,
-    //         divElement.querySelector("#txtPrecio").value,
-    //         divElement.querySelector("#txtImagen").value,
-    //         divElement.querySelector("#txtStock").value,
-    //         divElement.querySelector("#txtCategoria").value ,
-    //     )
-    //     create(product, divElement);
-    // });
+        let product = new Product(
+            0,
+            divElement.querySelector("#txtNombre").value,
+            divElement.querySelector("#txtDescripcion").value,
+            divElement.querySelector("#txtPrecio").value,
+            divElement.querySelector("#txtImagen").value,
+            divElement.querySelector("#txtStock").value,
+            divElement.querySelector("#select-category option:checked").value ,
+        )
+        console.log(product)
+        create(product, divElement);
+    });
 
-
+    const categories = await CategoryController.getAll();
+    setListCategories(categories, selectCategories)
 
     const products = await getAll();
     setListProducts(products, bodyTable);
@@ -52,20 +56,7 @@ function setListCategories(list, elementHtml) {
     list.forEach(element => {
         elementHtml.innerHTML +=
             `
-        <tr>
-        <td>${element.id}</td>
-        <td>${element.category}</td>
-        <td>
-            <button class="btn btn-warning">
-                <i class="fas fa-edit"></i>
-                Editar
-            </button>
-            <button class="btn btn-danger">
-                <i class="fas fa-trash"></i>
-                Eliminar
-            </button>
-        </td>
-        </tr>
+         <option value="${element.id}">${element.category}</option>
         `;
     });
 }
@@ -80,7 +71,6 @@ function setListProducts(list, elementHtml) {
         <td>${element.price}</td>
         <td>
         <img class='image-responsive' width="150" height="150" src='${element.image}'/>
-        
         </td>
         <td>${element.stock}</td>
         <td>${element.id_category_fk}</td>
@@ -108,10 +98,7 @@ function create(product, divElement) {
     const bodyTable = divElement.querySelector("#list-products");
     fetch
         (
-            `${environment.endpoint}/ecommerce-core/routes
-            /product.routes.php?
-            name=${product.name}&description=${product.description}&
-            price=${product.price}&image=${product.image}&stock=${product.stock}&id_category=${product.id_category}`,
+            `${environment.endpoint}/ecommerce-core/routes/product.routes.php?name=${product.name}&description=${product.description}&price=${product.price}&image=${product.image}&stock=${product.stock}&id_category=${product.id_category_fk}`,
             {
                 method: "POST",
                 headers: {
@@ -129,25 +116,27 @@ function create(product, divElement) {
                     limpiarFormulario(divElement);
                     bodyTable.innerHTML +=
                         `
-                    <tr>
-                    <td>${newDate.id}</td>
-                    <td>${newDate.name}</td>
-                    <td>${newDate.description}</td>
-                    <td>${newDate.price}</td>
-                    <td>${newDate.image}</td>
-                    <td>${newDate.stock}</td>
-                    <td>${newDate.id_category}</td>
-                    <td>
-                        <button class="btn btn-warning">
-                            <i class="fas fa-edit"></i>
-                            Editar
-                        </button>
-                        <button class="btn btn-danger">
-                            <i class="fas fa-trash"></i>
-                            Eliminar
-                        </button>
-                    </td>
-                    </tr>
+                        <tr>
+                        <td>${newDate.id}</td>
+                        <td>${newDate.name}</td>
+                        <td>${newDate.description}</td>
+                        <td>${newDate.price}</td>
+                        <td>
+                        <img class='image-responsive' width="150" height="150" src='${newDate.image}'/>
+                        </td>
+                        <td>${newDate.stock}</td>
+                        <td>${newDate.id_category_fk}</td>
+                        <td>
+                            <button class="btn btn-warning">
+                                <i class="fas fa-edit"></i>
+                                Editar
+                            </button>
+                            <button class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                                Eliminar
+                            </button>
+                        </td>
+                        </tr>
                     `;
                 });
             }
@@ -159,7 +148,9 @@ function create(product, divElement) {
 }
 function limpiarFormulario(divElement) {
     divElement.querySelector("#txtNombre").value = "";
+    divElement.querySelector("#txtDescripcion").value = "";
     divElement.querySelector("#txtPrecio").value = "";
+    divElement.querySelector("#txtImagen").value = "";
     divElement.querySelector("#txtStock").value = "";
-    divElement.querySelector("#Imagen").value = "";
+    divElement.querySelector("#select-category").value = "";
 }

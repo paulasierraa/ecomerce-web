@@ -59,7 +59,7 @@ function setListCategories(list, elementHtml) {
         `;
     });
 }
-const getAll = async () => {
+export const getAll = async () => {
     const response = await fetch(
         `${environment.endpoint}/ecommerce-core/routes/category.routes.php`
     );
