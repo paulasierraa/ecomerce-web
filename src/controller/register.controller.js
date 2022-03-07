@@ -1,13 +1,18 @@
 import {environment} from "../environments/environments";
 import views from "../views/auth/register/register.html";
 import "../views/auth/register/register.css";
+import {setPermisos} from './navbar.controller.js';
 
 export default () => {
   const divElement = document.createElement("div");
   divElement.innerHTML = views;
 
   const btnRegister = divElement.querySelector("#btnRegister");
-  btnRegister.addEventListener("click", () => {
+  const form = divElement.querySelector("#formRegister");
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
     const username = divElement.querySelector("#floatingInputUser").value;
     const email = divElement.querySelector("#floatingInput").value;
     const password = divElement.querySelector("#floatingPassword").value;
@@ -32,7 +37,11 @@ export default () => {
     )
       .then((response) => {
         if (response.ok) {
-          return response.text();
+          response.json().then(data => {
+            localStorage.setItem("userInformation", JSON.stringify(data[0]));
+            setPermisos();
+            window.location.href = ""
+          });
         } else {
           throw "Error en la petición";
         }
