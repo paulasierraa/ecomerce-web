@@ -7,7 +7,6 @@ import * as CategoryController from './category.controller.js';
 export default async () => {
     const divElement = document.createElement("div");
     divElement.innerHTML = views;
-
     const bodyTable = divElement.querySelector("#list-products");
     const btnSearch = divElement.querySelector("#txtBuscarProducto");
     const btnGuardar = divElement.querySelector("#btnGuardarProducto");

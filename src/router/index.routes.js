@@ -29,7 +29,7 @@ const router = async (route) => {
       break;
     }
     case "#/history": {
-      return content.appendChild(pages.ShopHistory());
+      return content.appendChild(await pages.ShopHistory());
     }
     case "#/product-detail": {
       return content.appendChild(pages.ProductDetail());

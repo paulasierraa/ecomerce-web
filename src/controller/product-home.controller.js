@@ -10,6 +10,7 @@ const getProducts = async () => {
 export default async () => {
   const divElement = document.createElement("div");
   divElement.innerHTML = views;
+  console.log("entró")
 
   const cardProduct = divElement.querySelector("#card-products");
 
@@ -17,7 +18,7 @@ export default async () => {
 
   products.forEach((product) => {
     cardProduct.innerHTML += `
-    <div class="col-sm-3 mb-4">
+    <div class="col-sm-3">
     <div class="card" style="width: 18rem;">
   <img class="card-img-top" src="${product.image}" alt="Card image cap">
   <div class="card-body">
