@@ -3,13 +3,17 @@ function setPermisos() {
     const divElement = document.getElementById("navbar-element");
     let user = JSON.parse(localStorage.getItem("userInformation"));
     let id_rol = user.id_rol_fk;
-    if (id_rol == "1") {
-        const category = divElement.querySelector("#option-category");
+    if (id_rol == "1"||id_rol=="5") {
+        if(id_rol == "1"){
+            const category = divElement.querySelector("#option-category");
+            category.classList.remove("d-none");
+        }
         const product = divElement.querySelector("#option-product");
-        
-        category.classList.remove("d-none");
+        const chart = divElement.querySelector("#option-chart");
+
         product.classList.remove("d-none");
-        
+        chart.classList.remove("d-none");
+
     }
     const login = divElement.querySelector("#option-login");
     const register = divElement.querySelector("#option-register");

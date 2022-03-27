@@ -38,13 +38,19 @@ const router = async (route) => {
       return content.appendChild(pages.dashboard());
     }
     case "#/dashboard/productos": {
-      if (validateAuthAdmin()) {
+      console.log(validateAuthSeller())
+      if (validateAuthSeller()) {
         return content.appendChild(await pages.product());
       }
     }
     case "#/dashboard/categoria": {
       if (validateAuthAdmin()) {
         return content.appendChild(await pages.category());
+      }
+    }
+    case "#/dashboard/estadisticas": {
+      if (validateAuthSeller()) {
+        return content.appendChild(pages.chart());
       }
     }
     default: {
@@ -68,9 +74,21 @@ function validateAuth() {
 function validateAuthAdmin() {
   var auth = localStorage.getItem("userInformation");
   let user = JSON.parse(localStorage.getItem("userInformation"));
-  if (!auth||user.id_rol_fk!=1) {
+  if (!auth || user.id_rol_fk != 1) {
     window.location.replace(`${environment.principalPage}/#/`);
     return false;
+  }
+  return true;
+}
+function validateAuthSeller() {
+  var auth = localStorage.getItem("userInformation");
+  let user = JSON.parse(localStorage.getItem("userInformation"));
+  if (!auth || Number(user.id_rol_fk != 5)) {
+    if (Number(user.id_rol_fk == 1)) { return true }
+    else {
+      window.location.replace(`${environment.principalPage}/#/`);
+      return false;
+    }
   }
   return true;
 }

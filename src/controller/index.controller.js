@@ -8,6 +8,7 @@ import productHome from "./product-home.controller";
 import dashboard from "./dashboard.controller";
 import category from "./category.controller";
 import product from './product.controller';
+import chart from './chart.controller';
 const pages = {
   Login,
   Register,
@@ -18,7 +19,8 @@ const pages = {
   productHome,
   dashboard,
   category,
-  product
+  product,
+  chart
 };
 
 export { pages };
