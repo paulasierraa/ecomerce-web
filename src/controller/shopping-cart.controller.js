@@ -1,4 +1,5 @@
 import views from "../views/shopping-cart/shopping-cart.html";
+import { environment } from "../environments/environments";
 
 const keyLocalStorage = "Productos";
 const divElement = document.createElement("div");
@@ -10,14 +11,14 @@ let subtotal = 0;
 
 const getProductById = async (id) => {
   const response = await fetch(
-    `http://localhost/ecommerce-core/routes/products.routes.php?id=${id}`
+    `${environment.endpoint}/ecommerce-core/routes/products.routes.php?id=${id}`
   );
   return await response.json();
 };
 
 const createSale = async ({ id, date, id_seller_fk, id_client_fk }) => {
   const response = await fetch(
-    `http://localhost/ecommerce-core/routes/sale.routes.php?id=${id}&date=${date}&id_seller_fk=${id_seller_fk}&id_client_fk=${id_client_fk}`,
+    `${environment.endpoint}/ecommerce-core/routes/sale.routes.php?id=${id}&date=${date}&id_seller_fk=${id_seller_fk}&id_client_fk=${id_client_fk}`,
     {
       headers: {
         Accept: "application/json",
@@ -39,7 +40,7 @@ const createSale = async ({ id, date, id_seller_fk, id_client_fk }) => {
 const createSaleProduct = async ({ id_sale, id_product, amount }) => {
   console.log(id_sale, id_product, amount);
   const response = await fetch(
-    `http://localhost/ecommerce-core/routes/saleProduct.routes.php?id_sale=${id_sale}&id_product=${id_product}&amount=${amount}`,
+    `${environment.endpoint}/ecommerce-core/routes/saleProduct.routes.php?id_sale=${id_sale}&id_product=${id_product}&amount=${amount}`,
     {
       headers: {
         Accept: "application/json",
@@ -60,7 +61,7 @@ const createSaleProduct = async ({ id_sale, id_product, amount }) => {
 
 const getSale = async () => {
   const response = await fetch(
-    "http://localhost/ecommerce-core/routes/sale.routes.php",
+    environment.endpoint+"/ecommerce-core/routes/sale.routes.php",
     {
       headers: {
         Accept: "application/json",

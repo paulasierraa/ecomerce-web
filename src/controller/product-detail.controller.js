@@ -1,9 +1,10 @@
 import views from "../views/product/product-detail/product-detail.html";
 import "../views/product/product-detail/product-detail.css";
+import { environment } from "../environments/environments";
 
 const getProductById = async (id) => {
   const response = await fetch(
-    `http://localhost/ecommerce-core/routes/products.routes.php?id=${id}`
+    `${environment.endpoint}/ecommerce-core/routes/products.routes.php?id=${id}`
   );
   return await response.json();
 };

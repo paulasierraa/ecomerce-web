@@ -12,7 +12,7 @@ const getProducts = async () => {
 
 const getProductById = async (id) => {
   const response = await fetch(
-    `http://localhost/ecommerce-core/routes/products.routes.php?id=${id}`
+    `${environment.endpoint}/ecommerce-core/routes/products.routes.php?id=${id}`
   );
   return await response.json();
 };
@@ -27,7 +27,12 @@ const getProductsPaginate = async (reg, regPagina) => {
 export default async () => {
   const divElement = document.createElement("div");
   divElement.innerHTML = views;
-  console.log("entró")
+  const productsCantidad = await getProducts();
+  let regPagina = 8;
+  let paginas = productsCantidad.length / regPagina;
+  const templateCard = divElement.querySelector("#template-card").content;
+  const items = divElement.querySelector("#card-products");
+  const fragment = document.createDocumentFragment();
 
   const products = await getProductsPaginate();
 
