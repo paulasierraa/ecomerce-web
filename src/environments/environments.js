@@ -1,5 +1,4 @@
-
-export var environment ={
-    endpoint: "http://localhost:8081",
-    principalPage : "http://localhost:8082"
- };
+export var environment = {
+  endpoint: "http://localhost",
+  principalPage: "http://localhost",
+};

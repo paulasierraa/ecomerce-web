@@ -1,13 +1,16 @@
-import {environment} from "../environments/environments";
+import { environment } from "../environments/environments";
 import views from "../views/auth/register/register.html";
 import "../views/auth/register/register.css";
-import {setPermisos} from './navbar.controller.js';
+import { setPermisos } from "./navbar.controller.js";
 
 export default () => {
   const divElement = document.createElement("div");
   divElement.innerHTML = views;
 
+  const PORT = 8080 || process.env.PORT;
+
   const btnRegister = divElement.querySelector("#btnRegister");
+
   const form = divElement.querySelector("#formRegister");
 
   form.addEventListener("submit", (event) => {
@@ -37,10 +40,10 @@ export default () => {
     )
       .then((response) => {
         if (response.ok) {
-          response.json().then(data => {
+          response.json().then((data) => {
             localStorage.setItem("userInformation", JSON.stringify(data[0]));
             setPermisos();
-            window.location.href = ""
+            window.location.href = "";
           });
         } else {
           throw "Error en la petición";

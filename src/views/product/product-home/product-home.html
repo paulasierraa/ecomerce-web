@@ -4,7 +4,7 @@
     background-image: linear-gradient(90deg, #fe9a40 0%, #FA709A 100%);
     border-radius: 1%;
     border: 0;
-    }
+    } */
 
 
     .add-to-cart {
@@ -16,7 +16,13 @@
   color: #fff;
   -webkit-transition: background 0.3s ease;
   transition: background 0.3s ease;
-} */
+  
+} 
+
+.img{
+  width: 290px;
+  height: 290px;
+}
 </style>
 
 <div class="mt-4 ms-4">
@@ -28,3 +34,49 @@
     </div>
 </div>
 <div class="mt-4"></div>
+
+<template id="template-card">
+  <div class="col-12-mb-2 col-md-3">
+  <div class="card bg-dark text-white" style="width: 18rem;">
+    <img class="card-img-top img" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title" id="title">Titulo</h5>
+      <p class="card-text">precio</p>
+    </div>
+    <div class="card-body">
+      <div class="row text-center">
+        <div class="col-md-6">
+          <a class="btn add-to-cart btn-default">
+          <i class="fas fa-info-circle"></i>  
+          </a>
+        </div>
+        <div class="col-md-6">
+          <button class="btn add-to-cart btn-default btn-cart">
+            <i class="fas fa-shopping-cart"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+
+<!-- <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center pagination-lg">
+    <li class="page-item disabled">
+      <a class="page-link">Previous</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">1</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">2</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">3</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav> -->

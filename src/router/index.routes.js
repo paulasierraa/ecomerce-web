@@ -3,6 +3,7 @@ import { environment } from "../environments/environments";
 let content = document.getElementById("root");
 let dashboardContent = document.getElementById("dashboard-content");
 const router = async (route) => {
+  const valores = route.split("?");
   content.innerHTML = "";
   switch (route) {
     case "": {
@@ -31,8 +32,8 @@ const router = async (route) => {
     case "#/history": {
       return content.appendChild(await pages.ShopHistory());
     }
-    case "#/product-detail": {
-      return content.appendChild(pages.ProductDetail());
+    case `#/product-detail?${valores[1]}`: {
+      return content.appendChild(await pages.ProductDetail());
     }
     case "#/dashboard": {
       return content.appendChild(pages.dashboard());
@@ -69,7 +70,6 @@ function validateAuth() {
   }
   return true;
 }
-
 
 function validateAuthAdmin() {
   var auth = localStorage.getItem("userInformation");

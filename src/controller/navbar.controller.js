@@ -1,4 +1,3 @@
-
 function setPermisos() {
     const divElement = document.getElementById("navbar-element");
     let user = JSON.parse(localStorage.getItem("userInformation"));
@@ -29,18 +28,18 @@ function setPermisos() {
 
 }
 
-
 window.onload = function () {
-
-    if (localStorage.getItem("userInformation") != null && localStorage.getItem("userInformation") != undefined) {
-        setPermisos();
-    }
-    let salirBtn = document.getElementById("option-logout");
-    salirBtn.addEventListener("click", (event) => {
-        localStorage.removeItem("userInformation")
-        window.location.href = ""
-    })
-
+  if (
+    localStorage.getItem("userInformation") != null &&
+    localStorage.getItem("userInformation") != undefined
+  ) {
+    setPermisos();
+  }
+  let salirBtn = document.getElementById("option-logout");
+  salirBtn.addEventListener("click", (event) => {
+    localStorage.removeItem("userInformation");
+    window.location.href = "";
+  });
 };
 
-export { setPermisos }
+export { setPermisos };
