@@ -50,7 +50,7 @@ const router = async (route) => {
     }
     case "#/dashboard/estadisticas": {
       if (validateAuthSeller()) {
-        return content.appendChild(pages.chart());
+        return content.appendChild(await pages.chart());
       }
     }
     default: {
