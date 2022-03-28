@@ -15,6 +15,7 @@ export default async () => {
         let filter = divElement.querySelector("#txtBuscarProducto").value;
         search(filter, divElement);
     })
+    let user = JSON.parse(localStorage.getItem("userInformation"));
 
     btnGuardar.addEventListener("click", (event) => {
         // event.preventDefault();
@@ -27,15 +28,21 @@ export default async () => {
             divElement.querySelector("#txtImagen").value,
             divElement.querySelector("#txtStock").value,
             divElement.querySelector("#select-category option:checked").value ,
+            user.id
         )
-        console.log(product)
         create(product, divElement);
     });
 
     const categories = await CategoryController.getAll();
     setListCategories(categories, selectCategories)
-
-    const products = await getAll();
+    let products = []
+    if (Number(user.id_rol_fk) == 1) {
+        products = await getAll();
+    }
+    else if(Number(user.id_rol_fk) == 5)
+    {
+        products = await getAllSeller(user.id);
+    }
     setListProducts(products, bodyTable);
 
 
@@ -93,11 +100,17 @@ const getAll = async () => {
     );
     return await response.json();
 };
+const getAllSeller = async (id) => {
+    const response = await fetch(
+        `${environment.endpoint}/ecommerce-core/routes/products-seller.routes.php?id=${id}`
+    );
+    return await response.json();
+};
 function create(product, divElement) {
     const bodyTable = divElement.querySelector("#list-products");
     fetch
         (
-            `${environment.endpoint}/ecommerce-core/routes/product.routes.php?name=${product.name}&description=${product.description}&price=${product.price}&image=${product.image}&stock=${product.stock}&id_category=${product.id_category_fk}`,
+            `${environment.endpoint}/ecommerce-core/routes/product.routes.php?name=${product.name}&description=${product.description}&price=${product.price}&image=${product.image}&stock=${product.stock}&id_category=${product.id_category_fk}&id_user=${product.id_user_fk}`,
             {
                 method: "POST",
                 headers: {

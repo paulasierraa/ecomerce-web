@@ -1,5 +1,5 @@
 export class Product{
-    constructor(id,name,description,price,image,stock,id_category_fk){
+    constructor(id,name,description,price,image,stock,id_category_fk,id_user_fk){
         this.id=id;
         this.name=name;
         this.description=description;
@@ -7,5 +7,6 @@ export class Product{
         this.image=image;
         this.stock=stock;
         this.id_category_fk=id_category_fk;
+        this.id_user_fk=id_user_fk;
     }
 }
