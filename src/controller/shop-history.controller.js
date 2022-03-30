@@ -11,33 +11,45 @@ export default async () => {
     //ADMIN
     case 1: {
       const sells = await getAllAdmin();
+      console.log(sells);
       buildTableAdmin(sells, table)
       break;
     }
     //USUARIO
     case 2: {
-      // const sells= await getAllAdmin();
+      const sells= await getAllClient();
+      // console.log(sells);
+      buildTableClient(sells,table);
       break;
     }
     //VENDEDOR
     case 5: {
       const sells = await getAllSeller(user.id);
-      console.log(sells)
+      // console.log(sells)
       buildTableSeller(sells, table)
 
       break;
     }
     //VIP MEMBER
     case 6: {
+      const sells = await getAllClient();
+      // console.log(sells);
+      buildTableClient(sells,table);
       break;
     }
   }
+
+  divElement.querySelector("#btn-print").addEventListener("click", () => {
+    divElement.querySelector("#btn-print").classList.add("d-none");
+    window.print();
+  })
+
   return divElement;
 };
 
 const getAllAdmin = async () => {
   const response = await fetch(
-    `${environment.endpoint}/ecommerce-core/routes/sale.routes.php`
+    `${environment.endpoint}/ecommerce-core/routes/saleAdmin.routes.php`
   );
   return await response.json();
 };
@@ -48,8 +60,9 @@ const getAllSeller = async (id) => {
   return await response.json();
 };
 const getAllClient = async () => {
+  const user = JSON.parse(localStorage.getItem("userInformation"));
   const response = await fetch(
-    `${environment.endpoint}/ecommerce-core/routes/product.routes.php`
+    `${environment.endpoint}/ecommerce-core/routes/saleProduct2.routes.php?id_client=${user.id}`
   );
   return await response.json();
 };
@@ -167,6 +180,53 @@ function buildTableSeller(list, elementHtml) {
   });
 }
 
-function buildTableClient() {
-
+function buildTableClient(list,elementHtml) {
+  elementHtml.innerHTML +=
+  `
+  <thead>
+  <th scope="col">Id_sale</th>
+  <th scope="col">Name</th>
+  <th scope="col">Amount</th>
+  <th scope="col">Price</th>
+  <th scope="col">Image</th>
+  <th scope="col">Date</th>
+  </thead>
+`;
+list.forEach( element => {
+  elementHtml.innerHTML += 
+  `
+  <tbody>
+  <tr class="row-table-history">
+  <td>
+  <p class="title">
+    ${element.id_sale}
+  </p>
+  </td>
+  <td>
+  <p class="title">
+    ${element.name}
+  </p>
+  </td>
+  <td>
+  <p class="title">
+    ${element.amount}
+  </p>
+  </td>
+  <td>
+  <p class="title">
+    ${element.price}
+  </p>
+  </td>
+  <td>
+  <img class='img-flag' src="${element.image}"/>
+  </td>
+  <td>
+  <p class="title">
+    ${element.date}
+  </p>
+  </td>
+  </tr>
+  </tbody>
+  `
+});
 }

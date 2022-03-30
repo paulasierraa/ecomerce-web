@@ -9,6 +9,8 @@ const getProductById = async (id) => {
   return await response.json();
 };
 
+export const currencyFormat = (number) => new Intl.NumberFormat('es-CO', {style: 'currency',currency: 'COP', minimumFractionDigits: 2}).format(number);
+
 export default async () => {
   const valores = window.location.hash.split("?");
   const id = valores[1].split("=")[1];
@@ -42,7 +44,7 @@ export default async () => {
                         </div>
                     </div>
                     <p class="product-description">${product.description}</p>
-                    <h4 class="price">Precio <span>$${product.price}</span></h4>
+                    <h4 class="price">Precio <span>${currencyFormat(product.price)}</span></h4>
                     <div class="action">
                         <button class="add-to-cart btn btn-default" type="button">Agregar al carrito</button>
                     </div>

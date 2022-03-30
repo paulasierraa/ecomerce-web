@@ -1,15 +1,21 @@
 import views from "../views/shopping-cart/shopping-cart.html";
 import { environment } from "../environments/environments";
+import { router } from "../router/index.routes";
 
-const keyLocalStorage = "Productos";
+export const currencyFormat = (number) => new Intl.NumberFormat('es-CO', {style: 'currency',currency: 'COP', minimumFractionDigits: 2}).format(number);
+
+
 const divElement = document.createElement("div");
 divElement.innerHTML = views;
+
 const items = divElement.querySelector("#items-cart");
 const fragment = document.createDocumentFragment();
 const templateProduct = divElement.querySelector("#product-row").content;
+
 let user = JSON.parse(localStorage.getItem("userInformation"));
 let subtotal = 0;
 let total=0;
+
 const getProductById = async (id) => {
   const response = await fetch(
     `${environment.endpoint}/ecommerce-core/routes/products.routes.php?id=${id}`
@@ -17,52 +23,16 @@ const getProductById = async (id) => {
   return await response.json();
 };
 
-const createSale = async ({ id, date, id_seller_fk, id_client_fk }) => {
+const getProductsCart = async (id_sale) => {
   const response = await fetch(
-    `${environment.endpoint}/ecommerce-core/routes/sale.routes.php?id=${id}&date=${date}&id_seller_fk=${id_seller_fk}&id_client_fk=${id_client_fk}`,
-    {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    }
-  )
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw "Error en la petición";
-      }
-    })
-    .catch((error) => console.log(error));
+    `${environment.endpoint}/ecommerce-core/routes/saleProduct.routes.php?id_sale=${id_sale}`
+  );
+  return await response.json();
 };
 
-const createSaleProduct = async ({ id_sale, id_product, amount }) => {
-  console.log(id_sale, id_product, amount);
+const getSaleState = async (idClient) => {
   const response = await fetch(
-    `${environment.endpoint}/ecommerce-core/routes/saleProduct.routes.php?id_sale=${id_sale}&id_product=${id_product}&amount=${amount}`,
-    {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    }
-  )
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw "Error en la petición";
-      }
-    })
-    .catch((error) => console.log(error));
-};
-
-const getSale = async () => {
-  const response = await fetch(
-    environment.endpoint+"/ecommerce-core/routes/sale.routes.php",
+    `${environment.endpoint}/ecommerce-core/routes/saleState.routes.php?idClient=${idClient}`,
     {
       headers: {
         Accept: "application/json",
@@ -72,31 +42,61 @@ const getSale = async () => {
     }
   );
   return await response.json();
-};
+}
 
-export default () => {
-  const products = JSON.parse(localStorage.getItem(keyLocalStorage)) || [];
 
-  products.forEach(async (idProduct) => {
-    const product = await getProductById(idProduct);
-    renderProductCart(product);
+export default async() => {
+  const user = JSON.parse(localStorage.getItem("userInformation"));
+  const sale = await getSaleState(user.id);
+
+  if(sale[0].state === "1"){
+    const products = "";
+  } else {
+    const products = await getProductsCart(sale[0].id);
+
+  products.forEach( async(productSale) => {
+    const product = await getProductById(productSale.id_product);
+    renderProductCart(product, productSale.amount);
+  });
+  }
+
+  
+  
+  items.addEventListener("change", async (event) => {
+    const idProduct = event.target.id;
+    const amount = event.target.value;
+    const response = await updateSaleProduct(idProduct, amount);
+    
   });
 
-  items.addEventListener("click", deleteProductCart);
-  divElement.addEventListener("click", finishShop);
+  items.addEventListener('click', async (event) => {
+    const idProduct = event.target.dataset.id;
+    await deleteProductCart(idProduct);
+    
+  });
+
+  divElement.addEventListener('click', async(event) => {
+    if(event.target.classList.contains("btn-success")){
+      const total = divElement.querySelector("#totalCard").textContent;
+      await finishShopping(total);
+      
+    }
+  })
+  
 
   return divElement;
 };
 
-const renderProductCart = (product) => {
+const renderProductCart = (product, mount) => {
   product.forEach((p) => {
     templateProduct.querySelector("#name").textContent = p.name;
     templateProduct.querySelector(".img-flag").src = p.image;
-    templateProduct.querySelector("#price").textContent = p.price;
-    templateProduct.querySelector("#cantidad").textContent = 1;
-    templateProduct.querySelector("#total").textContent = p.price;
+    templateProduct.querySelector("#price").textContent = currencyFormat(p.price);
+    templateProduct.querySelector(".input-amount").value = mount;
+    templateProduct.querySelector(".input-amount").setAttribute("id", p.id);
+    templateProduct.querySelector("#total").textContent = currencyFormat(p.price * mount);
     templateProduct.querySelector(".btn-outline-dark").dataset.id = p.id;
-    subtotal = parseInt(subtotal) + parseInt(p.price);
+    subtotal = parseInt(subtotal) + (parseInt(p.price) * parseInt(mount));
     const clone = templateProduct.cloneNode(true);
     fragment.appendChild(clone);
   });
@@ -106,60 +106,69 @@ const renderProductCart = (product) => {
   if(Number(user.id_rol_fk)==6) //no cambiar
   {
     descuento = (subtotal+iva)*0.05;
-    divElement.querySelector("#descuento").textContent = `${descuento}`;
+    divElement.querySelector("#descuento").textContent = `${currencyFormat(descuento)}`;
   }
   total = (subtotal+iva)-descuento; 
-  divElement.querySelector("#subtotalCard").textContent = `Subtotal: ${subtotal}`;
-  divElement.querySelector("#iva").textContent = `Iva: ${iva}`; //no cambiar
-  divElement.querySelector("#totalCard").textContent = `Total: ${total}`;
+  divElement.querySelector("#subtotalCard").textContent = `Subtotal: ${currencyFormat(subtotal)}`;
+  divElement.querySelector("#iva").textContent = `Iva: ${currencyFormat(iva)}`; //no cambiar
+  divElement.querySelector("#totalCard").textContent = `Total: ${currencyFormat(total)}`;
 };
 
-const deleteProductCart = (event) => {
-  if (event.target.classList.contains("btn-outline-dark")) {
-    const id = event.target.dataset.id;
-    const products = readLocalStorage() || [];
-    const nuevoArray = products.filter((e) => e !== id);
-    localStorage.setItem(keyLocalStorage, JSON.stringify(nuevoArray));
-    window.location.reload();
-  }
-};
+const updateSaleProduct = async (idProduct, amount) => {
+  const user = JSON.parse(localStorage.getItem("userInformation"));
+  const sale = await getSaleState(user.id);
+  const response = await fetch(
+    `${environment.endpoint}/ecommerce-core/routes/saleProduct.routes.php?id_sale=${sale[0].id}&id_product=${idProduct}&amount=${amount}`,
+    {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      method: "PUT",
+    }
+  );
+  return await response.json();
+}
 
-const readLocalStorage = () => {
-  return JSON.parse(localStorage.getItem(keyLocalStorage));
-};
+const deleteProductCart = async (idProduct) => {
+  const user = JSON.parse(localStorage.getItem("userInformation"));
+  const sale = await getSaleState(user.id);
+  const response = await fetch(
+    `${environment.endpoint}/ecommerce-core/routes/saleProduct.routes.php?id_product=${idProduct}&id_sale=${sale[0].id}`,
+    {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      method: "DELETE",
+    }
+  );
+  return await response.json();
+}
 
-const finishShop = async (event) => {
-  if (event.target.classList.contains("btn-success")) {
-    const user = JSON.parse(localStorage.getItem("userInformation"));
-    const saleProduct = {
-      id: 0,
-      date: new Date().toISOString().slice(0, 19).replace("T", " "),
-      id_seller_fk: user.id,
-      id_client_fk: user.id,
-    };
-    await createSale(saleProduct);
+const finishShopping = async (total) => {
+  const precioTotal = total.split("$")[1];
+  let precioSinComilla = replaceAll(precioTotal, ",", "");
+  let precioSinPunto = replaceAll(precioSinComilla, ".", "");
+  const user = JSON.parse(localStorage.getItem("userInformation"));
+  const sale = await getSaleState(user.id);
+  const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  const response = await fetch(
+    `${environment.endpoint}/ecommerce-core/routes/saleProduct2.routes.php?id=${sale[0].id}&date=${date}&state=${1}&total=${precioSinPunto.trim()}`,
+    {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      method: "PUT",
+    }
+  );
+  return await response.json();
+}
 
-    const sale = await getSale();
+function replaceAll( text, busca, reemplaza ){
+  while (text.toString().indexOf(busca) != -1)
+      text = text.toString().replace(busca,reemplaza);
+  return text;
+}
 
-    const products = readLocalStorage() || [];
-
-    products.forEach(async (id) => {
-      const product = await getProductById(id);
-      console.log(product);
-
-      let saleProducts = {
-        id_sale: sale.id,
-        id_product: id,
-        amount: product[0].price,
-      };
-
-      await createSaleProduct(saleProducts);
-    });
-
-    localStorage.removeItem(keyLocalStorage);
-    divElement.querySelector("#alertShop").classList.remove("d-none");
-    setTimeout(() => {
-      window.location.reload();
-    }, 1500);
-  }
-};

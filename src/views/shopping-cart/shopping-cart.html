@@ -4,6 +4,10 @@
     width: 50px;
     height: 50px;
   }
+  .input-amount{
+        width: 50px;
+        height: 30px;
+    }
 </style>
 
 <div class="container-fluid">
@@ -84,27 +88,27 @@
 <template id="product-row">
   <tr>
     <th scope="row" id="name">
-      Computador Asus
+        Computador Asus
     </th>
     <td id="image">
-      <img alt="" class="img-flag">
+        <img alt="" class="img-flag">
     </td>
     <td id="price">
-      $ 1'200.000
-    </td>
-    <td id="cantidad">
-      2
-    </td>
-    <td id="total">
-      $ 1'200.000
+        $ 1'200.000
     </td>
     <td>
-      <button class="btn btn-outline-dark">
-        <i class="fas fa-trash"></i>
-        Eliminar
-      </button>
+      <input type="text" class="form-control input-amount">
     </td>
-  </tr>
+    <td id="total">
+        $ 1'200.000
+    </td>
+    <td>
+        <button  class="btn btn-outline-dark">
+          <i class="fas fa-trash"></i>
+          Eliminar
+          </button>
+    </td>
+</tr>
 </template>
 
 <div class="alert alert-success d-none pt-3" role="alert" id="alertShop">

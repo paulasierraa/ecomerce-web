@@ -1,4 +1,4 @@
 export var environment = {
-  endpoint: "http://localhost:8081",
+  endpoint: "http://localhost",
   principalPage: "http://localhost",
 };

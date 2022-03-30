@@ -24,7 +24,7 @@ const router = async (route) => {
       }
     }
     case "#/shopping-cart": {
-      return content.appendChild(pages.ShoppingCart());
+      return content.appendChild(await pages.ShoppingCart());
     }
     case "#/payment": {
       break;
