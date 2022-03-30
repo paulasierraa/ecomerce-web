@@ -7,8 +7,9 @@ divElement.innerHTML = views;
 const items = divElement.querySelector("#items-cart");
 const fragment = document.createDocumentFragment();
 const templateProduct = divElement.querySelector("#product-row").content;
+let user = JSON.parse(localStorage.getItem("userInformation"));
 let subtotal = 0;
-
+let total=0;
 const getProductById = async (id) => {
   const response = await fetch(
     `${environment.endpoint}/ecommerce-core/routes/products.routes.php?id=${id}`
@@ -100,8 +101,17 @@ const renderProductCart = (product) => {
     fragment.appendChild(clone);
   });
   items.appendChild(fragment);
-  divElement.querySelector("#totalCard").textContent = `Total: ${subtotal}`;
-  divElement.querySelector("#subtotalCard").textContent = `Total: ${subtotal}`;
+  let iva = subtotal * 0.19;
+  let descuento =0;
+  if(Number(user.id_rol_fk)==6)
+  {
+    descuento = (subtotal+iva)*0.05;
+    divElement.querySelector("#descuento").textContent = `${descuento}`;
+  }
+  total = (subtotal+iva)-descuento;
+  divElement.querySelector("#subtotalCard").textContent = `Subtotal: ${subtotal}`;
+  divElement.querySelector("#iva").textContent = `Iva: ${iva}`;
+  divElement.querySelector("#totalCard").textContent = `Total: ${total}`;
 };
 
 const deleteProductCart = (event) => {
