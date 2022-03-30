@@ -63,23 +63,24 @@ export default async() => {
   
   
   items.addEventListener("change", async (event) => {
+    event.preventDefault();
     const idProduct = event.target.id;
     const amount = event.target.value;
-    const response = await updateSaleProduct(idProduct, amount);
-    
+    await updateSaleProduct(idProduct, amount);
+    window.location.reload();
   });
 
   items.addEventListener('click', async (event) => {
     const idProduct = event.target.dataset.id;
     await deleteProductCart(idProduct);
-    
+    window.location.reload();
   });
 
   divElement.addEventListener('click', async(event) => {
     if(event.target.classList.contains("btn-success")){
       const total = divElement.querySelector("#totalCard").textContent;
       await finishShopping(total);
-      
+      window.location.reload();
     }
   })
   
@@ -127,7 +128,6 @@ const updateSaleProduct = async (idProduct, amount) => {
       method: "PUT",
     }
   );
-  return await response.json();
 }
 
 const deleteProductCart = async (idProduct) => {
@@ -143,7 +143,6 @@ const deleteProductCart = async (idProduct) => {
       method: "DELETE",
     }
   );
-  return await response.json();
 }
 
 const finishShopping = async (total) => {
@@ -163,7 +162,6 @@ const finishShopping = async (total) => {
       method: "PUT",
     }
   );
-  return await response.json();
 }
 
 function replaceAll( text, busca, reemplaza ){
