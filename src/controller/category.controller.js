@@ -41,16 +41,6 @@ function setListCategories(list, elementHtml) {
         <tr>
         <td>${element.id}</td>
         <td>${element.category}</td>
-        <td>
-            <button class="btn btn-warning">
-                <i class="fas fa-edit"></i>
-                Editar
-            </button>
-            <button class="btn btn-danger">
-                <i class="fas fa-trash"></i>
-                Eliminar
-            </button>
-        </td>
         </tr>
         `;
   });
@@ -87,16 +77,6 @@ function create(category, divElement) {
         <tr>
         <td>${newDate.id}</td>
         <td>${newDate.category}</td>
-        <td>
-            <button class="btn btn-warning">
-                <i class="fas fa-edit"></i>
-                Editar
-            </button>
-            <button class="btn btn-danger">
-                <i class="fas fa-trash"></i>
-                Eliminar
-            </button>
-        </td>
         </tr>
         `;
         });
