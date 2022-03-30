@@ -46,7 +46,7 @@ export default async () => {
   
   
 
-  const products = await getProductsPaginate(0,8);
+  const products = await getProductsPaginate(0,30);
   
   renderProducts(products);
   renderButtonPaginate();
