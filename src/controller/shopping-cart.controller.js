@@ -101,16 +101,16 @@ const renderProductCart = (product) => {
     fragment.appendChild(clone);
   });
   items.appendChild(fragment);
-  let iva = subtotal * 0.19;
-  let descuento =0;
-  if(Number(user.id_rol_fk)==6)
+  let iva = subtotal * 0.19; //no cambiar
+  let descuento =0; //no cambiar
+  if(Number(user.id_rol_fk)==6) //no cambiar
   {
     descuento = (subtotal+iva)*0.05;
     divElement.querySelector("#descuento").textContent = `${descuento}`;
   }
-  total = (subtotal+iva)-descuento;
+  total = (subtotal+iva)-descuento; 
   divElement.querySelector("#subtotalCard").textContent = `Subtotal: ${subtotal}`;
-  divElement.querySelector("#iva").textContent = `Iva: ${iva}`;
+  divElement.querySelector("#iva").textContent = `Iva: ${iva}`; //no cambiar
   divElement.querySelector("#totalCard").textContent = `Total: ${total}`;
 };
 
