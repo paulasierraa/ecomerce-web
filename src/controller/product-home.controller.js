@@ -49,7 +49,7 @@ export default async () => {
   const products = await getProductsPaginate(0,30);
   
   renderProducts(products);
-  renderButtonPaginate();
+  // renderButtonPaginate();
 
  
 
@@ -124,6 +124,7 @@ const createSale = async ({ id, date, id_client_fk, state, total }) => {
 
 const createSaleProduct = async ({ id_sale, id_product, amount }) => {
   console.log(id_sale, id_product, amount);
+  
   const response = await fetch(
     `${environment.endpoint}/ecommerce-core/routes/saleProduct.routes.php?id_sale=${id_sale}&id_product=${id_product}&amount=${amount}`,
     {
@@ -160,6 +161,7 @@ const getSale = async () => {
 
 const addToCart = async (event) => {
   if(event.target.classList.contains("btn-cart")){
+
     const idProduct = event.target.dataset.id;
     const user = JSON.parse(localStorage.getItem("userInformation"));
     const statesSale = await getSaleState(user.id);
@@ -171,6 +173,7 @@ const addToCart = async (event) => {
     } else {
       estado = statesSale[0].state;
     }
+
 
     switch(estado){
       case "0":
