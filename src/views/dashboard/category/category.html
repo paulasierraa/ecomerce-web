@@ -2,7 +2,7 @@
     <div class="card mt-4 bg-dark">
         <h2 class="text-center text-white mt-3">Categorías</h2>
         <div class="card-body">
-            <div class="search-container d-flex justify-content-center row">
+            <div class="search-container d-flex justify-content-center row d-none">
                 <div class="col-6">
                     <div class="input-group mb-3 ">
                         <input type="text" class="form-control bg-dark text-white " id="txtBuscarCategoria"
@@ -21,15 +21,16 @@
                     </button>
                 </div>
             </div>
-            <table class="table table-dark table-hover table-admin">
-                <thead>
-                    <th>Id </th>
-                    <th>Categoría </th>
-                    <th>Acciones</th>
-                </thead>
-                <tbody id="list-category">
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-dark table-hover table-admin">
+                    <thead>
+                        <th>Id </th>
+                        <th>Categoría </th>
+                    </thead>
+                    <tbody id="list-category">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

@@ -80,16 +80,6 @@ function setListProducts(list, elementHtml) {
         </td>
         <td>${element.stock}</td>
         <td>${element.id_category_fk}</td>
-        <td>
-            <button class="btn btn-warning">
-                <i class="fas fa-edit"></i>
-                Editar
-            </button>
-            <button class="btn btn-danger">
-                <i class="fas fa-trash"></i>
-                Eliminar
-            </button>
-        </td>
         </tr>
         `;
     });
@@ -138,16 +128,6 @@ function create(product, divElement) {
                         </td>
                         <td>${newDate.stock}</td>
                         <td>${newDate.id_category_fk}</td>
-                        <td>
-                            <button class="btn btn-warning">
-                                <i class="fas fa-edit"></i>
-                                Editar
-                            </button>
-                            <button class="btn btn-danger">
-                                <i class="fas fa-trash"></i>
-                                Eliminar
-                            </button>
-                        </td>
                         </tr>
                     `;
                 });
